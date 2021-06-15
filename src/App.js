@@ -84,7 +84,7 @@ function App() {
     <>
 
       <Container>
-        <Login />
+        <Register />
       </Container>
 
     </>

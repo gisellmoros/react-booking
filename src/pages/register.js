@@ -1,5 +1,6 @@
 import React, {useState,useEffect} from 'react'
 import {Form,Button} from 'react-bootstrap'
+import Swal from 'sweetalert2'
 
 export default function Register() {
 
@@ -56,8 +57,31 @@ useEffect(()=> {
 
 function registerUser (e) {
 	e.preventDefault ()
-	alert("Thank you for registering")
 
+	fetch('http://localhost:4000/api/users/',{
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			firstName: firstName,
+			lastName: lastName,
+			email: email,
+			mobileNo: mobileNo,
+			password: password,
+			confirmPassword: confirmPassword
+		})
+		})
+		.then(res => res.json())
+		.then(data => {
+			console.log(data)
+		Swal.fire({
+		icon: "success",
+		title: "Registered Successfully.",
+		text: "Congratulations for registering!"
+	})
+
+		})
 	setFirstName("")
 	setLastName("")
 	setEmail("")
