@@ -39,6 +39,19 @@ function loginUser (e) {
 		title: "Logged in Successfully.",
 		text: "Thank you for logging in to Zuitt Booking System"
 	})
+	//get user's details from our token
+	fetch('http://localhost:4000/api/users/', {
+
+		headers: {
+			Authorization: `Bearer ${data.accessToken}`
+		}
+	})
+	.then(res => res.json())
+	.then(data => {
+		console.log(data)
+		localStorage.setItem('email',data.email)
+		localStorage.setItem('isAdmin',data.isAdmin)
+	})
 		})
 	setEmail("")
 	setPassword("")

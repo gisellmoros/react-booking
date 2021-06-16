@@ -81,6 +81,11 @@ function enroll() {
 				<Card.Text>
 					{count === 0 ? "No Enrollees Yet." : count}
 				</Card.Text>
+				<Card.Text>
+					{seats === 0
+						? 'No More Seates Available'
+						: `Seats available: ${seats}`}
+				</Card.Text>
 				{
 					isActive
 

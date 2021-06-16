@@ -7,16 +7,22 @@
 
 */
 //import app components
-import Home from './pages/home'
-import Course from './components/Course'
-import Register from './pages/register'
-import Login from './pages/login'
+import Home from 'pages/home'
+import NavBar from 'components/AppNavBar'
+import Course from 'components/Course'
+import Register from 'pages/register'
+import Login from 'pages/login'
+import Courses from 'pages/courses'
 
 //import courseData
-import courses from './data/coursesData'
+import courses from 'data/coursesData'
 
 //import react-bootstrap components
 import {Container} from 'react-bootstrap'
+
+//import react-router-dom components
+import {BrowserRouter as Router} from 'react-router-dom'
+import {Route,Switch} from 'react-router-dom'
 
 //import CSS
 import './App.css'
@@ -73,19 +79,21 @@ function App() {
         Push your mini-activities and activity to the react-booking repo in gitlab as:
         "includes mini-activities and activity s45-s46"
   */
-  let coursesComponents = courses.map(course => {
-
-    return <Course course={course}/>
-
-  })
-  console.log(coursesComponents)
+ 
 
   return (
     <>
-
+    <Router>
+      <NavBar />
       <Container>
-        <Register />
+        <Switch>
+          <Route exact path="/" component={Home}/>
+          <Route exact path="/courses" component={Courses}/>
+          <Route exact path="/register" component={Register}/>
+          <Route exact path="/login" component={Login}/>
+        </Switch>
       </Container>
+    </Router>
 
     </>
   );
