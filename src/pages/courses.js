@@ -23,7 +23,7 @@ fetch('http://localhost:4000/api/courses/', {
 		setAllCourses(data) 
 	
 
-/*
+
 useEffect(() => {
 
 fetch('http://localhost:4000/api/courses/getActive')
@@ -33,7 +33,7 @@ fetch('http://localhost:4000/api/courses/getActive')
 	setActiveCourses(data) 
 })
 },[])
-*/
+
 let coursesComponents = allCourses.map(course => {
 
     return <Course key={course._id} course={course}/>
