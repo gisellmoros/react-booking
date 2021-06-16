@@ -51,7 +51,7 @@ function enroll() {
 	
 	//countVariable++
 }
-	console.log("Hello, I will run whenever we update a state.")
+	// console.log("Hello, I will run whenever we update a state.")
 
 /*
 		Rendering

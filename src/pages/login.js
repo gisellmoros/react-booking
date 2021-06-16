@@ -1,11 +1,21 @@
-import React, {useState,useEffect} from 'react'
+import React, {useState,useEffect,useContext} from 'react'
 import {Form,Button} from 'react-bootstrap'
 import Swal from 'sweetalert2'
+//import redirect component from react-router-dom this will allow us to redirect user to the courses page after login
+import {Redirect} from 'react-router-dom'
+
+//import the user context
+import UserContext from 'userContext'
 
 export default function Login() {
+	//unwrap the UserContext to get the global user state and its setter function
+	const {user,setUser} = useContext(UserContext)
+	console.log(user)
+
 	const [email,setEmail] = useState("")
 	const [password,setPassword] = useState("")
 	const [isActive,setIsActive] = useState(true)
+	const [willRedirect,setWillRedirect] = useState(false)
 
 useEffect(()=> {
 	if(email !== "" && password !== "") {
@@ -34,6 +44,7 @@ function loginUser (e) {
 		.then(res => res.json())
 		.then(data => {
 			console.log(data)
+			localStorage.setItem('token',data.accessToken)
 			Swal.fire({
 		icon: "success",
 		title: "Logged in Successfully.",
@@ -51,6 +62,12 @@ function loginUser (e) {
 		console.log(data)
 		localStorage.setItem('email',data.email)
 		localStorage.setItem('isAdmin',data.isAdmin)
+		setWillRedirect(true)
+
+		setUser({
+			email: data.email,
+			isAdmin: data.isAdmin
+		})
 	})
 		})
 	setEmail("")
@@ -59,7 +76,9 @@ function loginUser (e) {
 }
 
 return(
-
+	willRedirect ?
+	<Redirect to="/courses"/>
+	:
 <div>
 	<h3 className="text-center">Login</h3>
 	<Form onSubmit={e => loginUser(e)}>

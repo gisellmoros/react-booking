@@ -6,6 +6,7 @@
     These are called JSX Fragments, which allows you to enclose adjacent JSX elements.
 
 */
+import {useState,useEffect} from 'react'
 //import app components
 import Home from 'pages/home'
 import NavBar from 'components/AppNavBar'
@@ -26,6 +27,9 @@ import {Route,Switch} from 'react-router-dom'
 
 //import CSS
 import './App.css'
+
+//import context provider
+import {UserProvider} from './userContext'
 function App() {
 
 /*  console.log(courses)*/
@@ -79,10 +83,16 @@ function App() {
         Push your mini-activities and activity to the react-booking repo in gitlab as:
         "includes mini-activities and activity s45-s46"
   */
- 
+ const [user,setUser] = useState({
+    email: localStorage.getItem('email'),
+    isAdmin: localStorage.getItem('isAdmin') === "true"
+ })
+
+    console.log(user)
 
   return (
     <>
+    <UserProvider value={{user,setUser}}>
     <Router>
       <NavBar />
       <Container>
@@ -94,6 +104,7 @@ function App() {
         </Switch>
       </Container>
     </Router>
+    </UserProvider>
 
     </>
   );

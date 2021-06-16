@@ -1,9 +1,12 @@
+import {useContext} from 'react'
 //import app components
-import Banner from '../components/Banner'
-import Highlights from '../components/Highlights'
+import Banner from 'components/Banner'
+import Highlights from 'components/Highlights'
+
+import UserContext from 'userContext'
 
 export default function Home(){
-
+	//console.log(useContext(UserContext))
 	/*
 	  Mini Activity:
 
